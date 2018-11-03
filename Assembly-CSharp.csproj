@@ -164,6 +164,8 @@
      <Compile Include="Assets\GoogleVR\Scripts\Video\GvrVideoPlayerTexture.cs" />
      <Compile Include="Assets\Scripts\gameLogic.cs" />
      <Compile Include="Assets\Scripts\mission.cs" />
+     <Compile Include="Assets\Scripts\mushroomQuest.cs" />
+     <Compile Include="Assets\Scripts\mushroomsCollected.cs" />
      <Compile Include="Assets\Scripts\playSound.cs" />
      <Compile Include="Assets\Scripts\questLogic.cs" />
      <Compile Include="Assets\Scripts\quitApplication.cs" />
