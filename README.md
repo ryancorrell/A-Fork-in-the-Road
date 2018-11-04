@@ -8,6 +8,7 @@ This project is part of [Udacity](https://www.udacity.com "Udacity - Be in deman
 
 
 ## Guidance
+https://answers.unity.com/questions/1141480/enabling-and-disabling-child-particles.html
 
 Main scene -  stock cube room from GVR pack
 
@@ -18,4 +19,9 @@ Main scene -  stock cube room from GVR pack
 Music: https://www.bensound.com 
 
 
-
+## Models
+Trees https://sketchfab.com/models/2e70c34af8994852acd4b9ffce596336
+House https://sketchfab.com/models/72b3afcd7fa6448e83af59f61200b40d
+Girl https://sketchfab.com/models/7b54db20469a4011b4209c1a811c10bd
+Mushrooms
+Ground

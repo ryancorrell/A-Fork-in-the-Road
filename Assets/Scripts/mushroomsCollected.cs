@@ -14,15 +14,14 @@ public class mushroomsCollected : MonoBehaviour {
 	public Text mushroomScoreBoard;
 	public static int mushroomTotal = 0;
 
-	//public Text restartText;
 	ParticleSystem[] childrenParticleSystem;
 
 	// Use this for initialization
 	void Start() {
 		mushroomTotal = 0;
-		childrenParticleSystem = gameObject.GetComponentsInChildren<ParticleSystem> ();
+		childrenParticleSystem = mushroomParent.gameObject.GetComponentsInChildren<ParticleSystem> ();
 		//Start with quest board hidden
-		mushroomParent.gameObject.GetComponentInChildren<ParticleSystem> ().Stop();
+		//mushroomParent.gameObject.GetComponentInChildren<ParticleSystem> ().Stop();
 		mushroomScoreBoard.enabled = false;
 	}
 

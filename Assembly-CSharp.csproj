@@ -162,7 +162,11 @@
      <Compile Include="Assets\GoogleVR\Scripts\Utilities\GvrMathHelpers.cs" />
      <Compile Include="Assets\GoogleVR\Scripts\Utilities\GvrUIHelpers.cs" />
      <Compile Include="Assets\GoogleVR\Scripts\Video\GvrVideoPlayerTexture.cs" />
+     <Compile Include="Assets\Scripts\RaycastMovement.cs" />
+     <Compile Include="Assets\Scripts\WaypointMovement.cs" />
+     <Compile Include="Assets\Scripts\forestAudio.cs" />
      <Compile Include="Assets\Scripts\gameLogic.cs" />
+     <Compile Include="Assets\Scripts\girlAudio.cs" />
      <Compile Include="Assets\Scripts\mission.cs" />
      <Compile Include="Assets\Scripts\mushroomQuest.cs" />
      <Compile Include="Assets\Scripts\mushroomsCollected.cs" />
@@ -179,6 +183,7 @@
      <None Include="Assets\GoogleVR\Demos\Shaders\GVRDemo\GVRDemoAmbientOcclusion.shader" />
      <None Include="Assets\GoogleVR\Shaders\Video\VideoUnlitShader.shader" />
      <None Include="Assets\GoogleVR\Shaders\GvrUnlitTextureOverlay.shader" />
+     <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
      <None Include="Assets\GoogleVR\Shaders\GvrControllerReticle.shader" />
      <None Include="Assets\GoogleVR\Plugins\Android\AndroidManifest-Daydream.xml" />
      <None Include="Assets\GoogleVR\Demos\Shaders\GVRDemo\GVRDemoUnlitGrayscaleToColor.shader" />
@@ -210,6 +215,10 @@
  <Reference Include="Google.ProtocolBuffers">
  <HintPath>E:/Projects/Udacity/A-Fork-in-the-Road/Assets/GoogleVR/Plugins/Google.ProtocolBuffers.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{40A88B03-E4F1-CB72-868A-20EADCDBC0EB}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
