@@ -24,10 +24,12 @@ public class girlAudio : MonoBehaviour {
 
 	public Text NPCDialog;
 	public bool returnToHelp = false;
-
+	public bool stopReturnPlay = false;
 
 	public GameObject deliveryQuestButton;
+	public GameObject deliveryQuestNoButton;
 	public GameObject mushroomQuestButton;
+	public GameObject mushroomQuestNoButton;
 	// Use this for initialization
 	void Start () {
 		//Start with Girl sniffling
@@ -37,25 +39,30 @@ public class girlAudio : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
 	void OnTriggerEnter(Collider collider){
 		if (!returnToHelp) {
 			StartCoroutine(questGiven());
 			deliveryQuestButton.gameObject.SetActive (true);
+			deliveryQuestNoButton.gameObject.SetActive (true);
 		} else {
 			StartCoroutine(returnToGirl());
 			mushroomQuestButton.gameObject.SetActive (true);
+			mushroomQuestNoButton.gameObject.SetActive (true);
 		}
 		//Debug.Log ("Child Trigger enter hit");
 	}
 
 	void OnTriggerExit(Collider collider){
-		NPCSource.clip = npcDialog[6];
-		NPCSource.Play ();
-		returnToHelp = true;
-		//Debug.Log ("Child Trigger exit hit");
+		if(!stopReturnPlay){
+			NPCSource.clip = npcDialog[6];
+			NPCSource.Play ();
+			returnToHelp = true;
+			//Debug.Log ("Child Trigger exit hit");
+			stopReturnPlay = true;
+		}
 	}
 
 	IEnumerator questGiven(){
@@ -74,18 +81,22 @@ public class girlAudio : MonoBehaviour {
 		NPCDialog.text="Could you deliver the package for me?";
 
 	}
-
+		
 	IEnumerator returnToGirl(){
 		//ACCEPT
 		NPCSource.clip = npcDialog [7];
 		NPCSource.Play ();
-		NPCDialog.text = "";
-		//DECLINE
+		NPCDialog.text = "Great! My grandmother really loves mushrooms. Can you find 5 mushrooms in the forest and give them to her?";
 		yield return new WaitForSeconds (NPCSource.clip.length);
-		NPCSource.clip = npcDialog [8];
-		NPCSource.Play ();
-		NPCDialog.text="";
+		NPCDialog.text = "";
 	}
 
-
+	IEnumerator rejectMushroomQuest(){
+		//DECLINE
+		NPCSource.clip = npcDialog [8];
+		NPCSource.Play ();
+		NPCDialog.text="That's okay. She rarely leaves her cottage much anymore. They're probably growning on her anyway.";
+		yield return new WaitForSeconds (NPCSource.clip.length);
+		NPCDialog.text = "";
+	}
 }

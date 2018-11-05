@@ -15,7 +15,9 @@ public class questLogic : MonoBehaviour {
 	public Text NPCDialog;
 
 	public GameObject deliveryQuestButton;
+	public GameObject deliveryQuestNoButton;
 	public GameObject mushroomQuestButton;
+	public GameObject mushroomQuestNoButton;
 
 	//Particle System array from childen of MushroomParent
 	ParticleSystem[] childrenParticleSystem;
@@ -32,7 +34,9 @@ public class questLogic : MonoBehaviour {
 
 		//All quest buttons are off
 		deliveryQuestButton.gameObject.SetActive(false);
+		deliveryQuestNoButton.gameObject.SetActive(false);
 		mushroomQuestButton.gameObject.SetActive(false);
+		mushroomQuestNoButton.gameObject.SetActive(false);
 	}
 
 	void Update(){
@@ -54,7 +58,17 @@ public class questLogic : MonoBehaviour {
 		deliveryQuestActive = true; 
 		deliveryScoreBoard.enabled = true;
 		deliveryQuestButton.gameObject.SetActive (false);
+		deliveryQuestNoButton.gameObject.SetActive (false);
 		NPCDialog.text = "Oh good! Thank you!";
+	}
+
+	public void rejectDeliveryQuest(){
+		//mushroomParent.gameObject.GetComponentInChildren<ParticleSystem> ().Play ();
+		deliveryQuestActive = true; 
+		deliveryScoreBoard.enabled = true;
+		deliveryQuestButton.gameObject.SetActive (false);
+		deliveryQuestNoButton.gameObject.SetActive (false);
+		NPCDialog.text = "Oh. It's okay. I hope to find someone else to deliver the package before it gets dark.";
 	}
 
 	public void acceptMushroomQuest(){
@@ -67,7 +81,15 @@ public class questLogic : MonoBehaviour {
 		}
 		mushroomScoreBoard.enabled = true;
 		mushroomQuestButton.gameObject.SetActive (false);
-		NPCDialog.text = "Great! My grandmother really loves mushrooms. Can you find 5 mushrooms in the forest and give them to her?";
+		mushroomQuestNoButton.gameObject.SetActive (false);
+		//NPCDialog.text = "Great! My grandmother really loves mushrooms. Can you find 5 mushrooms in the forest and give them to her?";
 	}
 
+	public void rejectMushroomQuest(){
+		mushroomQuestActive = false; 
+		mushroomScoreBoard.enabled = true;
+		mushroomQuestButton.gameObject.SetActive (false);
+		mushroomQuestNoButton.gameObject.SetActive (false);
+		//NPCDialog.text = "Great! My grandmother really loves mushrooms. Can you find 5 mushrooms in the forest and give them to her?";
+	}
 }
