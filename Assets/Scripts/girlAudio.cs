@@ -20,7 +20,8 @@ using UnityEngine.UI;
 public class girlAudio : MonoBehaviour {
 
 	public AudioClip[] npcDialog;
-	public AudioSource NPCSource;
+	//public AudioSource NPCSource;
+	public GvrAudioSource NPCSource;
 
 	public Text NPCDialog;
 	public bool returnToHelp = false;
@@ -30,6 +31,7 @@ public class girlAudio : MonoBehaviour {
 	public GameObject deliveryQuestNoButton;
 	public GameObject mushroomQuestButton;
 	public GameObject mushroomQuestNoButton;
+
 	// Use this for initialization
 	void Start () {
 		//Start with Girl sniffling
@@ -64,7 +66,7 @@ public class girlAudio : MonoBehaviour {
 			stopReturnPlay = true;
 		}
 	}
-
+		
 	IEnumerator questGiven(){
 		NPCSource.clip = npcDialog [0];
 		NPCSource.Stop ();

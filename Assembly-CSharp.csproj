@@ -163,6 +163,7 @@
      <Compile Include="Assets\GoogleVR\Scripts\Utilities\GvrUIHelpers.cs" />
      <Compile Include="Assets\GoogleVR\Scripts\Video\GvrVideoPlayerTexture.cs" />
      <Compile Include="Assets\Scripts\WaypointMovement.cs" />
+     <Compile Include="Assets\Scripts\enableVR.cs" />
      <Compile Include="Assets\Scripts\forestAudio.cs" />
      <Compile Include="Assets\Scripts\gameLogic.cs" />
      <Compile Include="Assets\Scripts\girlAudio.cs" />
