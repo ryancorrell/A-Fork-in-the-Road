@@ -163,11 +163,11 @@
      <Compile Include="Assets\GoogleVR\Scripts\Utilities\GvrUIHelpers.cs" />
      <Compile Include="Assets\GoogleVR\Scripts\Video\GvrVideoPlayerTexture.cs" />
      <Compile Include="Assets\Scripts\WaypointMovement.cs" />
-     <Compile Include="Assets\Scripts\enableVR.cs" />
      <Compile Include="Assets\Scripts\forestAudio.cs" />
      <Compile Include="Assets\Scripts\gameLogic.cs" />
      <Compile Include="Assets\Scripts\girlAudio.cs" />
-     <Compile Include="Assets\Scripts\mission.cs" />
+     <Compile Include="Assets\Scripts\grandmaAudio.cs" />
+     <Compile Include="Assets\Scripts\lookAtMe.cs" />
      <Compile Include="Assets\Scripts\mushroomQuest.cs" />
      <Compile Include="Assets\Scripts\mushroomsCollected.cs" />
      <Compile Include="Assets\Scripts\playSound.cs" />

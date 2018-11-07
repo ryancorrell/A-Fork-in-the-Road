@@ -10,18 +10,36 @@ This project is part of [Udacity](https://www.udacity.com "Udacity - Be in deman
 ## Guidance
 https://answers.unity.com/questions/1141480/enabling-and-disabling-child-particles.html
 
-Main scene -  stock cube room from GVR pack
 
 ## Videos Used (Dropbox Hosted)
 
 
-## Music
+## Music / sounds
 Music: https://www.bensound.com 
-
+Sounds: https://www.soundjay.com/door-sounds-1.html
 
 ## Models
-Trees https://sketchfab.com/models/2e70c34af8994852acd4b9ffce596336
+Trees Designed by me, on Blender
 House https://sketchfab.com/models/72b3afcd7fa6448e83af59f61200b40d
 Girl https://sketchfab.com/models/7b54db20469a4011b4209c1a811c10bd
-Mushrooms
-Ground
+Mushrooms Designed by me, on Blender FFEFC7 FF0A1A
+Ground Designed by me, on Blender
+
+## Achievements:
+###Fundamentals – 800pts
+	Scale – 100pts
+	Animation – 100pts (I did use a prefab, so please deduct if needed)
+	Lighting – 100pts
+	Locomotion – 100pts
+	Physics - 100pts
+	Video Player – 100pts x2 = 200pts
+	Empathy - 100pts
+ 
+###Completeness – 1000pts
+	Gamification – 250pts
+	Diegetic UI – 250pts
+	Alt Storyline – 250pts
+	3D modeling – 250pts
+
+###Challenges – 500pts
+	User testing – 250pts x 2 = 500pts

@@ -22,6 +22,9 @@ public class questLogic : MonoBehaviour {
 	//Particle System array from childen of MushroomParent
 	ParticleSystem[] childrenParticleSystem;
 
+	//public GameObject tmpGirl;
+
+
 	void Start(){
 		//When game starts, the scoreboard is blank
 		deliveryScoreBoard.enabled = false;
@@ -37,6 +40,7 @@ public class questLogic : MonoBehaviour {
 		deliveryQuestNoButton.gameObject.SetActive(false);
 		mushroomQuestButton.gameObject.SetActive(false);
 		mushroomQuestNoButton.gameObject.SetActive(false);
+
 	}
 
 	void Update(){
@@ -59,13 +63,13 @@ public class questLogic : MonoBehaviour {
 		deliveryScoreBoard.enabled = true;
 		deliveryQuestButton.gameObject.SetActive (false);
 		deliveryQuestNoButton.gameObject.SetActive (false);
-		NPCDialog.text = "Oh good! Thank you!";
+		//NPCDialog.text = "Oh good! Thank you!";
 	}
 
 	public void rejectDeliveryQuest(){
 		//mushroomParent.gameObject.GetComponentInChildren<ParticleSystem> ().Play ();
-		deliveryQuestActive = true; 
-		deliveryScoreBoard.enabled = true;
+		deliveryQuestActive = false; 
+		//deliveryScoreBoard.enabled = true;
 		deliveryQuestButton.gameObject.SetActive (false);
 		deliveryQuestNoButton.gameObject.SetActive (false);
 		NPCDialog.text = "Oh. It's okay. I hope to find someone else to deliver the package before it gets dark.";
@@ -83,6 +87,7 @@ public class questLogic : MonoBehaviour {
 		mushroomQuestButton.gameObject.SetActive (false);
 		mushroomQuestNoButton.gameObject.SetActive (false);
 		//NPCDialog.text = "Great! My grandmother really loves mushrooms. Can you find 5 mushrooms in the forest and give them to her?";
+		Debug.Log ("Accepted");
 	}
 
 	public void rejectMushroomQuest(){
@@ -91,5 +96,7 @@ public class questLogic : MonoBehaviour {
 		mushroomQuestButton.gameObject.SetActive (false);
 		mushroomQuestNoButton.gameObject.SetActive (false);
 		//NPCDialog.text = "Great! My grandmother really loves mushrooms. Can you find 5 mushrooms in the forest and give them to her?";
+		Debug.Log ("Rejected");
 	}
+
 }

@@ -47,7 +47,7 @@ public class forestAudio : MonoBehaviour {
 	void Update () {
 		//Check to see if quest is active
 		if (_questLogic.mushroomQuestActive) {
-			Debug.Log ("Script successfully found!");
+			//Debug.Log ("Script successfully found!");
 		}
 	}
 

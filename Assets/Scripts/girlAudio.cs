@@ -32,15 +32,20 @@ public class girlAudio : MonoBehaviour {
 	public GameObject mushroomQuestButton;
 	public GameObject mushroomQuestNoButton;
 
+	//public Transform player;
+
 	// Use this for initialization
 	void Start () {
+
 		//Start with Girl sniffling
 		NPCSource.clip = npcDialog[0];
 		NPCSource.Play ();
+
+		//player = GameObject.FindGameObjectWithTag ("Player").transform;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () {	
 
 	}
 
@@ -66,7 +71,32 @@ public class girlAudio : MonoBehaviour {
 			stopReturnPlay = true;
 		}
 	}
-		
+
+	public void acceptMushroomQuestDialog(){
+		StartCoroutine (acceptMushroomQuestCoroutine ());
+	}
+
+	public void rejectMushroomQuestDialog(){
+		StartCoroutine (rejectMushroomQuestCoroutine ());
+	}
+
+	IEnumerator acceptMushroomQuestCoroutine(){
+		NPCSource.clip = npcDialog [4];
+		NPCSource.Play ();
+		NPCDialog.text = "Oh good! Thank you!";
+		yield return new WaitForSeconds (NPCSource.clip.length);
+		NPCDialog.text = "";
+	}
+
+	IEnumerator rejectMushroomQuestCoroutine(){
+		//DECLINE
+		NPCSource.clip = npcDialog [8];
+		NPCSource.Play ();
+		NPCDialog.text="That's okay. She rarely leaves her cottage much anymore. They're probably growning on her anyway.";
+		yield return new WaitForSeconds (NPCSource.clip.length);
+		NPCDialog.text = "";
+	}
+
 	IEnumerator questGiven(){
 		NPCSource.clip = npcDialog [0];
 		NPCSource.Stop ();
@@ -81,7 +111,8 @@ public class girlAudio : MonoBehaviour {
 		NPCSource.clip = npcDialog [3];
 		NPCSource.Play ();
 		NPCDialog.text="Could you deliver the package for me?";
-
+		yield return new WaitForSeconds (2);
+		NPCDialog.text="";
 	}
 		
 	IEnumerator returnToGirl(){
@@ -92,13 +123,5 @@ public class girlAudio : MonoBehaviour {
 		yield return new WaitForSeconds (NPCSource.clip.length);
 		NPCDialog.text = "";
 	}
-
-	IEnumerator rejectMushroomQuest(){
-		//DECLINE
-		NPCSource.clip = npcDialog [8];
-		NPCSource.Play ();
-		NPCDialog.text="That's okay. She rarely leaves her cottage much anymore. They're probably growning on her anyway.";
-		yield return new WaitForSeconds (NPCSource.clip.length);
-		NPCDialog.text = "";
-	}
+		
 }
