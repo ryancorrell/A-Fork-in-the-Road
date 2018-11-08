@@ -14,18 +14,16 @@ using UnityEngine.UI;
  * 6-Oh Hey
  * 7-ACCEPT MUSHROOM QUEST 
  * 8-REJECT MUSHROOM QUEST
- * 
 */
 
 public class girlAudio : MonoBehaviour {
 
 	public AudioClip[] npcDialog;
-	//public AudioSource NPCSource;
 	public GvrAudioSource NPCSource;
 
 	public Text NPCDialog;
 	public bool returnToHelp = false;
-	public bool stopReturnPlay = false;
+	public bool stopReturnPlay = true;
 
 	public GameObject deliveryQuestButton;
 	public GameObject deliveryQuestNoButton;
@@ -54,22 +52,28 @@ public class girlAudio : MonoBehaviour {
 			StartCoroutine(questGiven());
 			deliveryQuestButton.gameObject.SetActive (true);
 			deliveryQuestNoButton.gameObject.SetActive (true);
+			stopReturnPlay = false;
 		} else {
 			StartCoroutine(returnToGirl());
 			mushroomQuestButton.gameObject.SetActive (true);
 			mushroomQuestNoButton.gameObject.SetActive (true);
+			stopReturnPlay = true;
 		}
 		//Debug.Log ("Child Trigger enter hit");
 	}
 
 	void OnTriggerExit(Collider collider){
 		if(!stopReturnPlay){
-			NPCSource.clip = npcDialog[6];
-			NPCSource.Play ();
-			returnToHelp = true;
-			//Debug.Log ("Child Trigger exit hit");
-			stopReturnPlay = true;
+			StartCoroutine (comeBack ());
 		}
+	}
+
+	public void acceptDeliveryQuestDialog(){
+		StartCoroutine (acceptDeliveryQuestCoroutine ());
+	}
+
+	public void rejectDeliveryQuestDialog(){
+		StartCoroutine (rejectDeliveryQuestCoroutine ());
 	}
 
 	public void acceptMushroomQuestDialog(){
@@ -80,7 +84,7 @@ public class girlAudio : MonoBehaviour {
 		StartCoroutine (rejectMushroomQuestCoroutine ());
 	}
 
-	IEnumerator acceptMushroomQuestCoroutine(){
+	public IEnumerator acceptDeliveryQuestCoroutine(){
 		NPCSource.clip = npcDialog [4];
 		NPCSource.Play ();
 		NPCDialog.text = "Oh good! Thank you!";
@@ -88,7 +92,24 @@ public class girlAudio : MonoBehaviour {
 		NPCDialog.text = "";
 	}
 
-	IEnumerator rejectMushroomQuestCoroutine(){
+	public IEnumerator rejectDeliveryQuestCoroutine(){
+		//DECLINE
+		NPCSource.clip = npcDialog [5];
+		NPCSource.Play ();
+		NPCDialog.text="Oh. It's okay. I hope to find someone else to deliver the package before it gets dark.";
+		yield return new WaitForSeconds (NPCSource.clip.length);
+		NPCDialog.text = "";
+	}
+
+	public IEnumerator acceptMushroomQuestCoroutine(){
+		NPCSource.clip = npcDialog [4];
+		NPCSource.Play ();
+		NPCDialog.text = "Oh good! Thank you!";
+		yield return new WaitForSeconds (NPCSource.clip.length);
+		NPCDialog.text = "";
+	}
+
+	public IEnumerator rejectMushroomQuestCoroutine(){
 		//DECLINE
 		NPCSource.clip = npcDialog [8];
 		NPCSource.Play ();
@@ -97,7 +118,7 @@ public class girlAudio : MonoBehaviour {
 		NPCDialog.text = "";
 	}
 
-	IEnumerator questGiven(){
+	public IEnumerator questGiven(){
 		NPCSource.clip = npcDialog [0];
 		NPCSource.Stop ();
 		NPCSource.clip = npcDialog [1];
@@ -114,14 +135,25 @@ public class girlAudio : MonoBehaviour {
 		yield return new WaitForSeconds (2);
 		NPCDialog.text="";
 	}
-		
-	IEnumerator returnToGirl(){
+
+	public IEnumerator comeBack(){
+		returnToHelp = true;
+		stopReturnPlay = true;
+		NPCSource.clip = npcDialog [6];
+		NPCSource.Play ();
+		NPCDialog.text = "Oh hey! Can you do one more thing for me?";
+		yield return new WaitForSeconds (NPCSource.clip.length);
+		NPCDialog.text = "";
+	}
+
+	public IEnumerator returnToGirl(){
 		//ACCEPT
 		NPCSource.clip = npcDialog [7];
 		NPCSource.Play ();
 		NPCDialog.text = "Great! My grandmother really loves mushrooms. Can you find 5 mushrooms in the forest and give them to her?";
 		yield return new WaitForSeconds (NPCSource.clip.length);
 		NPCDialog.text = "";
+		stopReturnPlay = true;
 	}
 		
 }

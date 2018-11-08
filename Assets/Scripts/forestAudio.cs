@@ -5,7 +5,6 @@ using UnityEngine;
 public class forestAudio : MonoBehaviour {
 
 	public AudioClip[] forestDialog;
-	//public AudioSource forestSource;
 	public GvrAudioSource forestSource;
 	public GameObject trigger;
 

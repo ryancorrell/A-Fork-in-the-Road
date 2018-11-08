@@ -14,6 +14,9 @@ public class mushroomsCollected : MonoBehaviour {
 	public Text mushroomScoreBoard;
 	public static int mushroomTotal = 0;
 
+	public AudioClip[] tingClip;
+	public GvrAudioSource audioSource;
+
 	ParticleSystem[] childrenParticleSystem;
 
 	// Use this for initialization
@@ -34,6 +37,8 @@ public class mushroomsCollected : MonoBehaviour {
 		//questLog.Text = "";
 		mushroomTotal ++;
 		mushroomScoreBoard.text = "Mushrooms collected: " + mushroomTotal + "/5";
+		audioSource.clip = tingClip[0];
+		audioSource.Play ();
 		Debug.Log("Total Mushrooms picked: " + mushroomTotal);
 		Destroy (mushroom, .5f);
 		checkForCompletion ();
@@ -57,6 +62,8 @@ public class mushroomsCollected : MonoBehaviour {
 
 	public void checkForCompletion() {
 		if (mushroomTotal == 5) {
+			audioSource.clip = tingClip[1];
+			audioSource.Play ();
 			mushroomScoreBoard.text = "All mushrooms collected!";
 			//mushroomParent.gameObject.GetComponentInChildren<ParticleSystem> ().Stop();
 			foreach (ParticleSystem childPS in childrenParticleSystem) {
