@@ -6,10 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class questLogic : MonoBehaviour {
 
-	public bool deliveryQuestActive = false; 
+	public bool deliveryQuestActive = false;
+	public bool deliveryQuestInactive = false;
 	public Text deliveryScoreBoard;
 
 	public bool mushroomQuestActive = false; 
+	public bool mushroomQuestInactive = false;
+	public bool mushroomQuestCompleted = false;
 	public Text mushroomScoreBoard;
 	public GameObject mushroomParent;
 	public Text NPCDialog;
@@ -19,12 +22,8 @@ public class questLogic : MonoBehaviour {
 	public GameObject mushroomQuestButton;
 	public GameObject mushroomQuestNoButton;
 
-	//Particle System array from childen of MushroomParent
-	ParticleSystem[] childrenParticleSystem;
-
-	//public GameObject tmpGirl;
 	public girlAudio _girlAudio;
-
+	public mushroomsCollected _mushrooms;
 
 	void Start(){
 		//When game starts, the scoreboard is blank
@@ -32,29 +31,14 @@ public class questLogic : MonoBehaviour {
 		mushroomScoreBoard.enabled = false;
 		//NPCDialog.enabled = false;
 
-		//assign particles
-		childrenParticleSystem = mushroomParent.gameObject.GetComponentsInChildren<ParticleSystem> ();
-		//childrenParticleSystem = gameObject.GetComponentsInChildren<ParticleSystem> ();
-
 		//All quest buttons are off
 		deliveryQuestButton.gameObject.SetActive(false);
 		deliveryQuestNoButton.gameObject.SetActive(false);
 		mushroomQuestButton.gameObject.SetActive(false);
 		mushroomQuestNoButton.gameObject.SetActive(false);
-
 	}
 
 	void Update(){
-
-		if (!mushroomQuestActive) {
-			foreach (ParticleSystem childPS in childrenParticleSystem) {
-				ParticleSystem.EmissionModule childPSEmissionModule = childPS.emission;
-				childPSEmissionModule.enabled = false;
-			}
-
-			//mushroomQuestActive = true;
-
-		}
 
 	}
 
@@ -78,17 +62,13 @@ public class questLogic : MonoBehaviour {
 
 	public void acceptMushroomQuest(){
 		//mushroomParent.gameObject.GetComponentInChildren<ParticleSystem> ().Play ();
-		mushroomQuestActive = true; 
-		//mushroomParent.gameObject.GetComponentInChildren<ParticleSystem> ().Play();
-		foreach (ParticleSystem childPS in childrenParticleSystem) {
-			ParticleSystem.EmissionModule childPSEmissionModule = childPS.emission;
-			childPSEmissionModule.enabled = true;
-		}
+		mushroomQuestActive = true;
 		mushroomScoreBoard.enabled = true;
 		mushroomQuestButton.gameObject.SetActive (false);
 		mushroomQuestNoButton.gameObject.SetActive (false);
 		_girlAudio.acceptMushroomQuestDialog();
-		Debug.Log ("Accepted");
+		//Debug.Log ("Accepted");
+
 	}
 
 	public void rejectMushroomQuest(){

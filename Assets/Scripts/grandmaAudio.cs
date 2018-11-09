@@ -25,6 +25,13 @@ public class grandmaAudio : MonoBehaviour {
 
 	private questLogic _questLogic;
 
+	//REWARDS
+	public GameObject moneyBag;
+	public GameObject sodaCan;
+
+	//End Game
+	public endGame _endGame;
+
 	// Use this for initialization
 	void Start () {
 		//Get bool from questLogic to see if which quests are active
@@ -38,6 +45,11 @@ public class grandmaAudio : MonoBehaviour {
 			Debug.Log ("Could not find quest object");
 		}
 
+		moneyBag.SetActive (false);
+		sodaCan.SetActive (false);
+
+		_endGame = FindObjectOfType<endGame>();
+			
 	}
 	
 	// Update is called once per frame
@@ -50,7 +62,7 @@ public class grandmaAudio : MonoBehaviour {
 	public void goToGrandmothers(){
 		if (!_questLogic.deliveryQuestActive && !_questLogic.mushroomQuestActive) {
 			StartCoroutine (goAway ());
-		} else if (_questLogic.deliveryQuestActive && !_questLogic.mushroomQuestActive) {
+		} else if (_questLogic.deliveryQuestActive && !_questLogic.mushroomQuestActive && !_questLogic.mushroomQuestCompleted) {
 			StartCoroutine (deliverPackage ());
 		} else if (!_questLogic.deliveryQuestActive && _questLogic.mushroomQuestActive) {
 			StartCoroutine (deliverMushrooms ());
@@ -99,6 +111,8 @@ public class grandmaAudio : MonoBehaviour {
 		yield return new WaitForSeconds (NPCGrandmaSource.clip.length);
 		_questLogic.NPCDialog.text="";
 		_questLogic.deliveryQuestActive = false; 
+		_questLogic.deliveryQuestInactive = true;
+		sodaCan.SetActive (true);
 	}
 
 	IEnumerator deliverMushrooms(){
@@ -116,6 +130,9 @@ public class grandmaAudio : MonoBehaviour {
 		yield return new WaitForSeconds (NPCGrandmaSource.clip.length);
 		_questLogic.NPCDialog.text="";
 		_questLogic.mushroomQuestActive = false;
+		_questLogic.mushroomQuestInactive = true;
+		_questLogic.mushroomQuestCompleted = true;
+		moneyBag.SetActive (true);
 	}
 
 	IEnumerator deliverBoth(){
@@ -142,5 +159,10 @@ public class grandmaAudio : MonoBehaviour {
 		_questLogic.NPCDialog.text="";
 		_questLogic.deliveryQuestActive = false; 
 		_questLogic.mushroomQuestActive = false;
+		_questLogic.deliveryQuestInactive = true;
+		_questLogic.mushroomQuestInactive = true;
+		moneyBag.SetActive (true);
+		yield return new WaitForSeconds (3);
+		_endGame.FadeToEnd ();
 	}
 }

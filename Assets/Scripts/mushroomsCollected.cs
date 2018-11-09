@@ -12,33 +12,57 @@ public class mushroomsCollected : MonoBehaviour {
 	public GameObject mushroom;
 	public GameObject mushroomParent;
 	public Text mushroomScoreBoard;
+	public bool mushroomQuestCompleted = false;
 	public static int mushroomTotal = 0;
 
 	public AudioClip[] tingClip;
 	public GvrAudioSource audioSource;
 
-	ParticleSystem[] childrenParticleSystem;
+	private questLogic _questLogic;
 
 	// Use this for initialization
 	void Start() {
 		mushroomTotal = 0;
-		childrenParticleSystem = mushroomParent.gameObject.GetComponentsInChildren<ParticleSystem> ();
 		//Start with quest board hidden
-		//mushroomParent.gameObject.GetComponentInChildren<ParticleSystem> ().Stop();
 		mushroomScoreBoard.enabled = false;
+
+		toggleActiveMushrooms (false);
+
+		//enable questLogic
+		var mushroomQuestCompleted = GameObject.Find("GameLogic");
+		if (mushroomQuestCompleted == null) {
+			Debug.Log ("Could not find quest object");
+			return;
+		}
+		_questLogic = mushroomQuestCompleted.GetComponent<questLogic>();
+		if (_questLogic == null) {
+			Debug.Log ("Could not find quest object");
+		}
+
+
 	}
 
 	// Update is called once per frame
 	void Update() {
-
+		if (_questLogic.mushroomQuestActive == true && _questLogic.mushroomQuestCompleted == false) {
+			toggleActiveMushrooms (true);
+		} else {
+			toggleActiveMushrooms (false);
+		}
 	}
 		
+	public void toggleActiveMushrooms(bool toggle){
+		GetComponent<Collider> ().enabled = toggle;
+		GetComponent<GvrPointerPhysicsRaycaster> ().enabled = toggle;
+		GetComponent<SphereCollider> ().enabled = toggle;
+	}
+
 	public void pickMushroom(){
 		//questLog.Text = "";
 		mushroomTotal ++;
 		mushroomScoreBoard.text = "Mushrooms collected: " + mushroomTotal + "/5";
-		audioSource.clip = tingClip[0];
-		audioSource.Play ();
+		//audioSource.clip = tingClip[0];
+		audioSource.PlayOneShot (tingClip[0], .9f);
 		Debug.Log("Total Mushrooms picked: " + mushroomTotal);
 		Destroy (mushroom, .5f);
 		checkForCompletion ();
@@ -62,14 +86,14 @@ public class mushroomsCollected : MonoBehaviour {
 
 	public void checkForCompletion() {
 		if (mushroomTotal == 5) {
-			audioSource.clip = tingClip[1];
-			audioSource.Play ();
+			//audioSource.clip = tingClip[1];
+			audioSource.PlayOneShot (tingClip[1], .9f);
 			mushroomScoreBoard.text = "All mushrooms collected!";
-			//mushroomParent.gameObject.GetComponentInChildren<ParticleSystem> ().Stop();
-			foreach (ParticleSystem childPS in childrenParticleSystem) {
-				ParticleSystem.EmissionModule childPSEmissionModule = childPS.emission;
-				childPSEmissionModule.enabled = false;
-			}
+			mushroomQuestCompleted = true;
+			_questLogic.mushroomQuestCompleted = true;
+			_questLogic.mushroomQuestActive = false;
+			//Disable all mushrooms
+			toggleActiveMushrooms (false);
 		}
 	}
 
