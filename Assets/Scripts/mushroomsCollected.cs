@@ -12,6 +12,7 @@ public class mushroomsCollected : MonoBehaviour {
 	public GameObject mushroom;
 	public GameObject mushroomParent;
 	public Text mushroomScoreBoard;
+	public GameObject mushroomIcon;
 	public bool mushroomQuestCompleted = false;
 	public static int mushroomTotal = 0;
 
@@ -25,6 +26,7 @@ public class mushroomsCollected : MonoBehaviour {
 		mushroomTotal = 0;
 		//Start with quest board hidden
 		mushroomScoreBoard.enabled = false;
+		mushroomIcon.SetActive (false);
 
 		toggleActiveMushrooms (false);
 
@@ -60,7 +62,8 @@ public class mushroomsCollected : MonoBehaviour {
 	public void pickMushroom(){
 		//questLog.Text = "";
 		mushroomTotal ++;
-		mushroomScoreBoard.text = "Mushrooms collected: " + mushroomTotal + "/5";
+		mushroomScoreBoard.text = mushroomTotal + "/5";
+
 		//audioSource.clip = tingClip[0];
 		audioSource.PlayOneShot (tingClip[0], .9f);
 		Debug.Log("Total Mushrooms picked: " + mushroomTotal);
@@ -88,10 +91,10 @@ public class mushroomsCollected : MonoBehaviour {
 		if (mushroomTotal == 5) {
 			//audioSource.clip = tingClip[1];
 			audioSource.PlayOneShot (tingClip[1], .9f);
-			mushroomScoreBoard.text = "All mushrooms collected!";
+			mushroomScoreBoard.text = "5/5";
 			mushroomQuestCompleted = true;
 			_questLogic.mushroomQuestCompleted = true;
-			_questLogic.mushroomQuestActive = false;
+			_questLogic.mushroomQuestActive = true;
 			//Disable all mushrooms
 			toggleActiveMushrooms (false);
 		}

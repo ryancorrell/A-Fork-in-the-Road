@@ -163,7 +163,9 @@
      <Compile Include="Assets\GoogleVR\Scripts\Utilities\GvrUIHelpers.cs" />
      <Compile Include="Assets\GoogleVR\Scripts\Video\GvrVideoPlayerTexture.cs" />
      <Compile Include="Assets\Scripts\WaypointMovement.cs" />
+     <Compile Include="Assets\Scripts\bumpTree.cs" />
      <Compile Include="Assets\Scripts\forestAudio.cs" />
+     <Compile Include="Assets\Scripts\forestTrigger.cs" />
      <Compile Include="Assets\Scripts\gameLogic.cs" />
      <Compile Include="Assets\Scripts\girlAudio.cs" />
      <Compile Include="Assets\Scripts\grandmaAudio.cs" />
@@ -173,7 +175,9 @@
      <Compile Include="Assets\Scripts\playSound.cs" />
      <Compile Include="Assets\Scripts\questLogic.cs" />
      <Compile Include="Assets\Scripts\quitApplication.cs" />
-     <None Include="Assets\AdventureForge\Read me.txt" />
+     <Compile Include="Assets\Scripts\soundManagerAmbient.cs" />
+     <Compile Include="Assets\Scripts\soundManagerForest.cs" />
+     <Compile Include="Assets\endGame.cs" />
      <None Include="Assets\GoogleVR\Shaders\GvrUIOverlayFont.shader" />
      <None Include="Assets\GoogleVR\Shaders\GvrAdditiveOverlay.shader" />
      <None Include="Assets\GoogleVR\Demos\Environment\DemoEnvUnlitGrayscale.shader" />

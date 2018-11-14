@@ -29,6 +29,7 @@ public class girlAudio : MonoBehaviour {
 	public GameObject deliveryQuestNoButton;
 	public GameObject mushroomQuestButton;
 	public GameObject mushroomQuestNoButton;
+	public GameObject boxForGrandma;
 
 	//public Transform player;
 
@@ -39,6 +40,7 @@ public class girlAudio : MonoBehaviour {
 		NPCSource.clip = npcDialog[0];
 		NPCSource.Play ();
 
+		boxForGrandma.SetActive (false);
 		//player = GameObject.FindGameObjectWithTag ("Player").transform;
 	}
 	
@@ -87,16 +89,19 @@ public class girlAudio : MonoBehaviour {
 	public IEnumerator acceptDeliveryQuestCoroutine(){
 		NPCSource.clip = npcDialog [4];
 		NPCSource.Play ();
-		NPCDialog.text = "Oh good! Thank you!";
+		NPCDialog.text = "Girl: Oh good! Thank you!";
 		yield return new WaitForSeconds (NPCSource.clip.length);
 		NPCDialog.text = "";
+		NPCSource.clip = npcDialog [9];
+		NPCSource.Play ();
+		boxForGrandma.SetActive (true);
 	}
 
 	public IEnumerator rejectDeliveryQuestCoroutine(){
 		//DECLINE
 		NPCSource.clip = npcDialog [5];
 		NPCSource.Play ();
-		NPCDialog.text="Oh. It's okay. I hope to find someone else to deliver the package before it gets dark.";
+		NPCDialog.text="Girl: Oh. It's okay. I hope to find someone else to deliver the package before it gets dark.";
 		yield return new WaitForSeconds (NPCSource.clip.length);
 		NPCDialog.text = "";
 	}
@@ -104,7 +109,7 @@ public class girlAudio : MonoBehaviour {
 	public IEnumerator acceptMushroomQuestCoroutine(){
 		NPCSource.clip = npcDialog [4];
 		NPCSource.Play ();
-		NPCDialog.text = "Oh good! Thank you!";
+		NPCDialog.text = "Girl: Oh good! Thank you!";
 		yield return new WaitForSeconds (NPCSource.clip.length);
 		NPCDialog.text = "";
 	}
@@ -113,7 +118,7 @@ public class girlAudio : MonoBehaviour {
 		//DECLINE
 		NPCSource.clip = npcDialog [8];
 		NPCSource.Play ();
-		NPCDialog.text="That's okay. She rarely leaves her cottage much anymore. They're probably growning on her anyway.";
+		NPCDialog.text="Girl: That's okay. She rarely leaves her cottage much anymore. They're probably growning on her anyway.";
 		yield return new WaitForSeconds (NPCSource.clip.length);
 		NPCDialog.text = "";
 	}
@@ -123,15 +128,15 @@ public class girlAudio : MonoBehaviour {
 		NPCSource.Stop ();
 		NPCSource.clip = npcDialog [1];
 		NPCSource.Play ();
-		NPCDialog.text = "Excuse me, can you help me?";
+		NPCDialog.text = "Girl: Excuse me, can you help me?";
 		yield return new WaitForSeconds (NPCSource.clip.length);
 		NPCSource.clip = npcDialog [2];
 		NPCSource.Play ();
-		NPCDialog.text="I need to deliver a package to my grandmother, but I don't want to go into the woods.";
+		NPCDialog.text="Girl: I need to deliver a package to my grandmother, but I don't want to go into the woods.";
 		yield return new WaitForSeconds (NPCSource.clip.length);
 		NPCSource.clip = npcDialog [3];
 		NPCSource.Play ();
-		NPCDialog.text="Could you deliver the package for me?";
+		NPCDialog.text="Girl: Could you deliver the package for me?";
 		yield return new WaitForSeconds (2);
 		NPCDialog.text="";
 	}
@@ -141,7 +146,7 @@ public class girlAudio : MonoBehaviour {
 		stopReturnPlay = true;
 		NPCSource.clip = npcDialog [6];
 		NPCSource.Play ();
-		NPCDialog.text = "Oh hey! Can you do one more thing for me?";
+		NPCDialog.text = "Girl: Oh hey! Can you do one more thing for me?";
 		yield return new WaitForSeconds (NPCSource.clip.length);
 		NPCDialog.text = "";
 	}
@@ -150,7 +155,7 @@ public class girlAudio : MonoBehaviour {
 		//ACCEPT
 		NPCSource.clip = npcDialog [7];
 		NPCSource.Play ();
-		NPCDialog.text = "Great! My grandmother really loves mushrooms. Can you find 5 mushrooms in the forest and give them to her?";
+		NPCDialog.text = "Girl: Great! My grandmother really loves mushrooms. Can you find 5 mushrooms in the forest and give them to her?";
 		yield return new WaitForSeconds (NPCSource.clip.length);
 		NPCDialog.text = "";
 		stopReturnPlay = true;

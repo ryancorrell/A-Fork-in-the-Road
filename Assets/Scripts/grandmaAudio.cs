@@ -25,6 +25,8 @@ public class grandmaAudio : MonoBehaviour {
 
 	private questLogic _questLogic;
 
+	public GameObject boxForGrandma;
+
 	//REWARDS
 	public GameObject moneyBag;
 	public GameObject sodaCan;
@@ -55,17 +57,22 @@ public class grandmaAudio : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (_questLogic.mushroomQuestActive) {
-			Debug.Log ("Script successfully found!");
+			//Debug.Log ("Script successfully found!");
 		}
 	}
 
 	public void goToGrandmothers(){
-		if (!_questLogic.deliveryQuestActive && !_questLogic.mushroomQuestActive) {
+		//No active quests
+		if (!_questLogic.deliveryQuestActive && !_questLogic.mushroomQuestActive && !_questLogic.mushroomQuestCompleted) {
 			StartCoroutine (goAway ());
-		} else if (_questLogic.deliveryQuestActive && !_questLogic.mushroomQuestActive && !_questLogic.mushroomQuestCompleted) {
+		//Delivery active, mushrooms inactive. OR Delivery active AND mushroom completed
+		} else if (_questLogic.deliveryQuestActive && !_questLogic.mushroomQuestActive && !_questLogic.mushroomQuestCompleted || 
+			_questLogic.deliveryQuestActive && !_questLogic.mushroomQuestActive && _questLogic.mushroomQuestCompleted) {
 			StartCoroutine (deliverPackage ());
-		} else if (!_questLogic.deliveryQuestActive && _questLogic.mushroomQuestActive) {
+		//Delivery inactive and mushrooms active
+		} else if (!_questLogic.deliveryQuestActive && _questLogic.mushroomQuestActive && _questLogic.mushroomQuestCompleted) {
 			StartCoroutine (deliverMushrooms ());
+		//Both active
 		} else {
 			StartCoroutine (deliverBoth ());
 		}
@@ -79,15 +86,15 @@ public class grandmaAudio : MonoBehaviour {
 		yield return new WaitForSeconds (NPCGrandmaSource.clip.length);
 		NPCGrandmaSource.clip = NPCGrandmaDialog [1];
 		NPCGrandmaSource.Play ();
-		_questLogic.NPCDialog.text="Who is it? What do you want?";
+		_questLogic.NPCDialog.text="Grandmother: Who is it? What do you want?";
 		yield return new WaitForSeconds (NPCGrandmaSource.clip.length);
 		NPCGrandmaSource.clip = NPCGrandmaDialog [2];
 		NPCGrandmaSource.Play ();
-		_questLogic.NPCDialog.text="Go Away!";
+		_questLogic.NPCDialog.text="Grandmother: Go Away!";
 		yield return new WaitForSeconds (NPCGrandmaSource.clip.length);
 		NPCGrandmaSource.clip = NPCGrandmaDialog [3];
 		NPCGrandmaSource.Play ();
-		_questLogic.NPCDialog.text="No loitering!";
+		_questLogic.NPCDialog.text="Grandmother: No loitering!";
 		yield return new WaitForSeconds (5);
 		_questLogic.NPCDialog.text="";
 	}
@@ -99,15 +106,16 @@ public class grandmaAudio : MonoBehaviour {
 		yield return new WaitForSeconds (NPCGrandmaSource.clip.length);
 		NPCGrandmaSource.clip = NPCGrandmaDialog [4];
 		NPCGrandmaSource.Play ();
-		_questLogic.NPCDialog.text="Well hello dearie!";
+		_questLogic.NPCDialog.text="Grandmother: Well hello dearie!";
 		yield return new WaitForSeconds (NPCGrandmaSource.clip.length);
 		NPCGrandmaSource.clip = NPCGrandmaDialog [5];
 		NPCGrandmaSource.Play ();
-		_questLogic.NPCDialog.text="A package from my granddaughter? Why thank you!";
+		_questLogic.NPCDialog.text="Grandmother: A package from my granddaughter? Why thank you!";
 		yield return new WaitForSeconds (NPCGrandmaSource.clip.length);
+		Destroy (boxForGrandma);
 		NPCGrandmaSource.clip = NPCGrandmaDialog [6];
 		NPCGrandmaSource.Play ();
-		_questLogic.NPCDialog.text="Here's a reward for your kindness.";
+		_questLogic.NPCDialog.text="Grandmother: Here's a reward for your kindness.";
 		yield return new WaitForSeconds (NPCGrandmaSource.clip.length);
 		_questLogic.NPCDialog.text="";
 		_questLogic.deliveryQuestActive = false; 
@@ -122,11 +130,13 @@ public class grandmaAudio : MonoBehaviour {
 		yield return new WaitForSeconds (NPCGrandmaSource.clip.length);
 		NPCGrandmaSource.clip = NPCGrandmaDialog [7];
 		NPCGrandmaSource.Play ();
-		_questLogic.NPCDialog.text="Mushrooms! My favorite!";
+		_questLogic.NPCDialog.text="Grandmother: Mushrooms! My favorite!";
+		Destroy (_questLogic.mushroomIcon);
+		Destroy (_questLogic.mushroomScoreBoard);
 		yield return new WaitForSeconds (NPCGrandmaSource.clip.length);
 		NPCGrandmaSource.clip = NPCGrandmaDialog [8];
 		NPCGrandmaSource.Play ();
-		_questLogic.NPCDialog.text="Here's something for your troubles.";
+		_questLogic.NPCDialog.text="Grandmother: Here's something for your troubles.";
 		yield return new WaitForSeconds (NPCGrandmaSource.clip.length);
 		_questLogic.NPCDialog.text="";
 		_questLogic.mushroomQuestActive = false;
@@ -142,19 +152,23 @@ public class grandmaAudio : MonoBehaviour {
 		yield return new WaitForSeconds (NPCGrandmaSource.clip.length);	
 		NPCGrandmaSource.clip = NPCGrandmaDialog [4];
 		NPCGrandmaSource.Play ();
-		_questLogic.NPCDialog.text="Well hello dearie!";
+		_questLogic.NPCDialog.text="Grandmother: Well hello dearie!";
 		yield return new WaitForSeconds (NPCGrandmaSource.clip.length);
 		NPCGrandmaSource.clip = NPCGrandmaDialog [5];
 		NPCGrandmaSource.Play ();
-		_questLogic.NPCDialog.text="A package from my granddaughter? Why thank you!";
+		_questLogic.NPCDialog.text="Grandmother: A package from my granddaughter? Why thank you!";
 		yield return new WaitForSeconds (NPCGrandmaSource.clip.length);
+		Destroy (boxForGrandma);
 		NPCGrandmaSource.clip = NPCGrandmaDialog [9];
 		NPCGrandmaSource.Play ();
-		_questLogic.NPCDialog.text="And you brought me mushrooms! My favorite!";
+		_questLogic.NPCDialog.text="Grandmother: And you brought me mushrooms! My favorite!";
+		Destroy (_questLogic.mushroomIcon);
+		Destroy (_questLogic.mushroomScoreBoard);
+
 		yield return new WaitForSeconds (NPCGrandmaSource.clip.length);
 		NPCGrandmaSource.clip = NPCGrandmaDialog [8];
 		NPCGrandmaSource.Play ();
-		_questLogic.NPCDialog.text="Here's something for your troubles.";
+		_questLogic.NPCDialog.text="Grandmother: Here's something for your troubles.";
 		yield return new WaitForSeconds (NPCGrandmaSource.clip.length);
 		_questLogic.NPCDialog.text="";
 		_questLogic.deliveryQuestActive = false; 

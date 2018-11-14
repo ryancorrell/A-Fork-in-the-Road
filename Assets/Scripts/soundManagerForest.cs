@@ -10,12 +10,13 @@ public class soundManagerForest : MonoBehaviour {
 	public AudioClip[] creepyForest;
 
 	//AudioSource assigned to each game object
+	public GvrAudioSource whisper0;
 	public GvrAudioSource whisper1;
-	public GvrAudioSource whisper2;
-	public GvrAudioSource forestDialog1;
 	public GvrAudioSource forestDialog2;
 	public GvrAudioSource forestDialog3;
 	public GvrAudioSource forestDialog4;
+	public GvrAudioSource forestDialog5;
+	public GvrAudioSource backgroundSounds6;
 	/*AudioSource Array
 	 * whispers1
 	 * whispers2
@@ -44,37 +45,62 @@ public class soundManagerForest : MonoBehaviour {
 			Debug.Log ("Could not find quest object");
 		}
 
-		whisper1.clip = creepyForest [0];
+		//whispers always playing - ALT TURN LOOPING ON THOSE
+		whisper0.clip = creepyForest [0];
+		whisper0.Play ();
+
+		whisper1.clip = creepyForest [1];
 		whisper1.Play ();
-
-		whisper2.clip = creepyForest [1];
-		whisper2.Play ();
-
-		forestDialog1.clip = creepyForest [2];
-		forestDialog1.Play ();
-
-		forestDialog2.clip = creepyForest [3];
-		forestDialog2.Play ();
-
-		forestDialog3.clip = creepyForest [4];
-		forestDialog3.Play ();
-
-		forestDialog4.clip = creepyForest [5];
-		forestDialog4.Play ();
-		//Start with Forest Whispering - Range from 0-1
-		//int index = Random.Range(0, 1);
-		//forestSource.clip = forestDialog[0];
-//		whisper1.clip = creepyForest[0].GetComponent<GvrAudioSource>();
-//		forestSource.clip = forestDialog[index];
-//		whisper1.Play ();
-
-		//creepyForest [0].GetComponent<GvrAudioSource> ().clip;
-		//creepyForest [0].GetComponent<GvrAudioSource> ().Play ();
-
+	
 	}
 
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+/*	void OnTriggerEnter(Collider collider){
+		Debug.Log ("Forest Trigger hit");
+
+		if (_questLogic.mushroomQuestActive) {
+			StartCoroutine(questActive());
+		}else{
+			StartCoroutine(questInactive());		
+		}
+		forestDialog5.clip = creepyForest [5];
+		forestDialog5.Play ();
+	}*/
+
+	public IEnumerator questActive(){
+		/*
+			What does it want?
+			It takes our mushrooms
+			What is it?
+			Give them back!
+		*/
+		yield return new WaitForSeconds (2.5f);
+		forestDialog2.clip = creepyForest [2];
+		forestDialog2.Play ();
+		yield return new WaitForSeconds (2.5f);
+		forestDialog3.clip = creepyForest [3];
+		forestDialog3.Play ();
+		yield return new WaitForSeconds (2.5f);
+		forestDialog4.clip = creepyForest [4];
+		forestDialog4.Play ();
+		yield return new WaitForSeconds (2.5f);
+	}
+
+	public IEnumerator questInactive(){
+		/*
+			What does it want?
+			What is it?
+		*/
+		yield return new WaitForSeconds (2.5f);
+		forestDialog2.clip = creepyForest [2];
+		forestDialog2.Play ();
+		yield return new WaitForSeconds (2.75f);
+		forestDialog5.clip = creepyForest [5];
+		forestDialog5.Play ();
+		yield return new WaitForSeconds (2.5f);
 	}
 }

@@ -8,12 +8,13 @@ public class questLogic : MonoBehaviour {
 
 	public bool deliveryQuestActive = false;
 	public bool deliveryQuestInactive = false;
-	public Text deliveryScoreBoard;
+	//public Text deliveryScoreBoard;
 
 	public bool mushroomQuestActive = false; 
 	public bool mushroomQuestInactive = false;
 	public bool mushroomQuestCompleted = false;
 	public Text mushroomScoreBoard;
+	public GameObject mushroomIcon;
 	public GameObject mushroomParent;
 	public Text NPCDialog;
 
@@ -27,8 +28,9 @@ public class questLogic : MonoBehaviour {
 
 	void Start(){
 		//When game starts, the scoreboard is blank
-		deliveryScoreBoard.enabled = false;
+		//deliveryScoreBoard.enabled = false;
 		mushroomScoreBoard.enabled = false;
+		mushroomIcon.SetActive (false);
 		//NPCDialog.enabled = false;
 
 		//All quest buttons are off
@@ -45,7 +47,7 @@ public class questLogic : MonoBehaviour {
 	public void acceptDeliveryQuest(){
 		//mushroomParent.gameObject.GetComponentInChildren<ParticleSystem> ().Play ();
 		deliveryQuestActive = true; 
-		deliveryScoreBoard.enabled = true;
+		//deliveryScoreBoard.enabled = true;
 		deliveryQuestButton.gameObject.SetActive (false);
 		deliveryQuestNoButton.gameObject.SetActive (false);
 		_girlAudio.acceptDeliveryQuestDialog ();
@@ -54,7 +56,7 @@ public class questLogic : MonoBehaviour {
 	public void rejectDeliveryQuest(){
 		//mushroomParent.gameObject.GetComponentInChildren<ParticleSystem> ().Play ();
 		deliveryQuestActive = false; 
-		deliveryScoreBoard.enabled = false;
+		//deliveryScoreBoard.enabled = false;
 		deliveryQuestButton.gameObject.SetActive (false);
 		deliveryQuestNoButton.gameObject.SetActive (false);
 		_girlAudio.rejectDeliveryQuestDialog ();
@@ -64,6 +66,7 @@ public class questLogic : MonoBehaviour {
 		//mushroomParent.gameObject.GetComponentInChildren<ParticleSystem> ().Play ();
 		mushroomQuestActive = true;
 		mushroomScoreBoard.enabled = true;
+		mushroomIcon.SetActive (true);
 		mushroomQuestButton.gameObject.SetActive (false);
 		mushroomQuestNoButton.gameObject.SetActive (false);
 		_girlAudio.acceptMushroomQuestDialog();
@@ -74,6 +77,7 @@ public class questLogic : MonoBehaviour {
 	public void rejectMushroomQuest(){
 		mushroomQuestActive = false; 
 		mushroomScoreBoard.enabled = false;
+		mushroomIcon.SetActive (false);
 		mushroomQuestButton.gameObject.SetActive (false);
 		mushroomQuestNoButton.gameObject.SetActive (false);
 		_girlAudio.rejectMushroomQuestDialog();

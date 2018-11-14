@@ -4,16 +4,29 @@ using UnityEngine;
 
 public class soundManagerAmbient : MonoBehaviour {
 
-	public GameObject ambientSound;
-	public GameObject backgroundMusic;
+	//private questLogic _questLogic;
+
+	public AudioClip[] goodForest;
+
+	//AudioSource assigned to each game object
+	public GvrAudioSource ambientSound;
+
+	/*		
+		GvrAudioSource.clip = AudioClip[];
+		GvrAudioSource.Play();
+	*/
 
 	// Use this for initialization
 	void Start () {
-		
+		ambientSound.clip = goodForest [0];
+		ambientSound.Play ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+
+
 }
